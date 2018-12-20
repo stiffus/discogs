@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Searcing for artists</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <script type="text/javascript">
+        function storeImage(url) {
+
+            let payload = ({ url });
+            let payloadJson = JSON.stringify(payload);
+             const urlPost='/admin/api/post';
+             
+             const param = {
+                 headers: {
+                     "content-type": "application/json; charset=UTF-8"
+                 },
+                 body: payloadJson,
+                 method: "POST"
+             };
+
+             fetch(urlPost, param)
+             .then(data => data.text())
+             .then(res => console.log(res))
+             .catch(error=> console.log(error));
+        }
+        </script>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="main-header__nav">
+            <form action="/discogs" method="POST">
+                <input type="text" name="title">
+                <button type="submit">Search</button>
+            </form>
+        </nav>
+        
+    </header>
+    <div>
+        <ul class="main-header__item_list">
+            <% recordsImg.forEach((img) => { %>
+                <a href=<%= img.cover_image %> > 
+                    <img onclick="storeImage('<%= img.cover_image %>'); return false;" class="main-header__img" src=<%= img.cover_image %> />
+                </a>
+            <% })%>
+        </ul>
+    </div>
+</body>
+</html>
