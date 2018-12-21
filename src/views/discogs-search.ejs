@@ -7,12 +7,7 @@
     <title>Searcing for artists</title>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript">
-        function storeImage(url, title, callback) {
-            let t = "Christoifer";
-            let aban = '<%= callback.call('t') %>';
-
-            console.log('ifrån storeImage '+ aban);
-            //console.log('ifrån storeImage '+ '<%= callback.call(); %>');
+        function storeImage(url, title) {
 
             let payload = ({ url, title });
             let payloadJson = JSON.stringify(payload);
@@ -47,8 +42,7 @@
         <ul class="main-header__item_list">
             <% recordsImg.forEach((img) => { %>
                 <a href=<%= img.cover_image %> >
-                    <img onclick="storeImage('<%= img.cover_image %>', '<%= img.title %>', '<%= callback %>'); return false;" class="main-header__img" src=<%= img.cover_image %> />
-                </a>
+                    <img onclick="storeImage('<%= img.cover_image %>', '<%= img.title %>'); return false;" class="main-header__img" src=<%= img.cover_image %> /> </a>
             <% })%>
         </ul>
     </div>

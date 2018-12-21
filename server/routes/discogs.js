@@ -17,19 +17,10 @@ const getData = async url => {
     }
   };
 
-  const callbackObj = {
-     call(i) {
-      console.log('inne ifrån dsf');
-      return `Hello ${i}`;
-    }
-  }
-    
-
-
     const artistInfo = await getData(url);
     const artistObj = Object.values(artistInfo)[1];
     
-    res.render('discogs-search', {recordsImg: artistObj, callback: callbackObj});
+    res.render('discogs-search', {recordsImg: artistObj});
 });
 
 module.exports = router;

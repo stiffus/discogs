@@ -9,27 +9,18 @@ router.get('/search', (req, res, next) => {
 
   router.use('/api/post', (req, res, next) => {
 
-    const imageUrl = Object.values(req.body);
-
-    // console.log(`Inside post, ${imageUrl}`);
-    // let jsonObj = JSON.stringify({"name": "math"});
-    //res.send(jsonObj);
+    const {title, url} = req.body;
+     let saveRecord = new Image({ name: title, imageUrl: url });
     
-     let myData = new Image({ name: "foosrgjid", imageUrl: imageUrl });
-
-     console.log(myData);
-    
-     myData
+     saveRecord
         .save()
         .then(item => { 
-            console.log('sparad');
+            console.log(`sparade ${saveRecord}`);
             res.send("sparad")
         })
         .catch(err => {
-        res.status(400).send("fuck off")
+        res.status(400).send("Something went wrong")
     });
   });
-
-  
 
 module.exports = router;
