@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 });
 
 mongoose.connect(keys.mongoURI, {useNewUrlParser: true}).then(result => {
-  app.listen(3000, () => console.log('Listening mfa fucker'))
+  app.listen(3000, () => console.log('Listening on port 3000'))
 }).catch(err => {
   console.log(err);
 })
