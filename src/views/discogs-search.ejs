@@ -7,9 +7,9 @@
     <title>Searcing for artists</title>
     <link rel="stylesheet" href="./css/main.css">
     <script type="text/javascript">
-        function storeImage(url, title) {
+        function storeImage(url, title, id) {
 
-            let payload = ({ url, title });
+            let payload = ({ url, title, id });
             let payloadJson = JSON.stringify(payload);
              const urlPost='/admin/api/post';
              
@@ -42,7 +42,7 @@
         <ul class="main-header__item_list">
             <% recordsImg.forEach((img) => { %>
                 <a href=<%= img.cover_image %> >
-                    <img onclick="storeImage('<%= img.cover_image %>', '<%= img.title %>'); return false;" class="main-header__img" src=<%= img.cover_image %> /> </a>
+                    <img onclick="storeImage('<%= img.cover_image %>', '<%= img.title %>', '<%= img.id %>'); return false;" class="main-header__img" src=<%= img.cover_image %> /> </a>
             <% })%>
         </ul>
     </div>

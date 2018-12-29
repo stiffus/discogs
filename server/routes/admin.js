@@ -9,8 +9,8 @@ router.get('/search', (req, res, next) => {
 
   router.use('/api/post', (req, res, next) => {
 
-    const {title, url} = req.body;
-     let saveRecord = new Image({ name: title, imageUrl: url });
+    const {title, url, id} = req.body;
+     let saveRecord = new Image({ name: title, imageUrl: url, discogsId: id });
     
      saveRecord
         .save()
