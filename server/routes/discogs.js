@@ -3,6 +3,7 @@ const router = express.Router();
 const keys = require('../config/keys');
 
 const getDatabaseRecords = require('./mongo');
+const getDiscogsData = require('./rest');
 
 const fetch = require("node-fetch");
 
@@ -11,23 +12,11 @@ const compareRecords = (savedRecords ,id) => {
 }
 
 router.post('/discogs', async (req,res, next) => {
-const url = `https://api.discogs.com/database/search?q=${Object.values(req.body)}&key=${keys.discogsConsumerKey}&secret=${keys.discogsConsumerSecret}`;
 
-const getData = async url => {
-    try {
-      const response = await fetch(url);
-      const json = await response.json();
-      return json;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-    const artistInfo = await getData(url);
+    const artistInfo = await getDiscogsData(Object.values(req.body));
     const artistObj = Object.values(artistInfo)[1];
     
     const savedRecords = await getDatabaseRecords();
-    
     const showArtistRecords = artistObj.filter( artist => compareRecords(savedRecords, artist.id));
 
     res.render('discogs-search', {recordsImg: showArtistRecords});
